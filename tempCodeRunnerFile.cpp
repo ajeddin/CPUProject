@@ -1,1 +1,0 @@
-memory::allVariables[ocs2.str()]->getValue()

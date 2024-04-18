@@ -8,9 +8,12 @@ class Variable;
 class Number;
 class Word;
 namespace memory {
+    
     void addValueToMemory(Variable* aVar);
     float getValue(Number* aNum);
 std::string getValue(Word* aWord);
+ extern std::map<std::string, Variable*> allVariables; //gosh i hate this
+
 }
 
 
@@ -63,15 +66,8 @@ class Variable{
     // virtual Variable operator+();
     virtual std::string getValueStr()=0;
    virtual float getValue()=0;
-   int operator==(Variable& aVar){
-    // if (this->value == aVar->getValue()){
-    std::ostringstream ocs;
-    ocs << this;
-
-    // }
-    return memory::allVariables[ocs.str()]->getValue()== aVar.getValue();
-
-}
+ 
+ 
 };
 
 class Number: public Variable{
@@ -79,7 +75,15 @@ class Number: public Variable{
     public:
         Number(){};
     std::string getValueStr(){return "2";};
+    int operator==(Variable& aVar){
+    // if (this->value == aVar->getValue()){
+    std::ostringstream ocs;
+    ocs << this;
 
+    // }
+    return (this->value== aVar.getValue());
+    // return 1;
+}
 float value;
 float getValue()  {return value;}
 float operator+(Number& aNum){
@@ -96,6 +100,7 @@ float operator+(Number& aNum){
 
 
      };
+
 float operator-(Number& aNum){
         std::ostringstream ocs, ocs2;
         // ocs << this;
@@ -153,6 +158,16 @@ class Word: public Variable{
     std::string getValueStr()  {
     
     return value;}
+    int operator==(Variable& aVar){
+    // if (this->value == aVar->getValue()){
+    std::ostringstream ocs;
+    ocs << this;
+
+    // }
+    return (this->value == aVar.getValueStr());
+    // return 1;
+}
+
 std::string operator+(Word& aWord){
         std::ostringstream ocs, ocs2;
         // ocs << this;
@@ -173,6 +188,10 @@ std::string operator+(Word& aWord){
      };
      void operator=(char aWord){
     this->value = aWord;
+
+     };
+     void operator=(int aWord){
+    this->value = std::to_string(aWord);
 
      };
    
