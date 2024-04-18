@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <string>
 // #include <boolean>
 #include <vector>
 
@@ -71,6 +72,8 @@ class Variable{
 };
 
 class Number: public Variable{
+  friend std::ostream& operator<<(std::ostream& out,  Number& aNum);
+
  CPUClass<float> pc;
     public:
         Number(){};
@@ -95,6 +98,46 @@ float operator+(Number& aNum){
         pc.load(memory::getValue(this));
         pc.load(memory::getValue(&aNum));
         float n = pc.add();
+        // std::cout<<n;
+        return n;
+
+
+     };
+float operator+(float aNum){
+     
+        pc.load(memory::getValue(this));
+        pc.load(aNum);
+        float n = pc.add();
+        // std::cout<<n;
+        return n;
+
+
+     };
+float operator-(float aNum){
+     
+        pc.load(memory::getValue(this));
+        pc.load(aNum);
+        float n = pc.subtract();
+        // std::cout<<n;
+        return n;
+
+
+     };
+float operator/(float aNum){
+     
+        pc.load(memory::getValue(this));
+        pc.load(aNum);
+        float n = pc.divide();
+        // std::cout<<n;
+        return n;
+
+
+     };
+float operator*(float aNum){
+     
+        pc.load(memory::getValue(this));
+        pc.load(aNum);
+        float n = pc.multiply();
         // std::cout<<n;
         return n;
 
@@ -145,12 +188,27 @@ float operator*(Number& aNum){
 
 
      };
+float operator+( Word& aWord){
+    std::cout<<"\nError\n";
+    return 0;
+}
+float operator+( std::string aword){
+    std::cout<<"\nError\n";
+    return 0;
+}
+// float operator+( char aword){
+//     std::cout<<"\nError\n";
+//     return 0;
+// }
+
     void operator=(float aNum){
     this->value = aNum;
 
      };
 };
 class Word: public Variable{
+             friend std::ostream& operator<<(std::ostream& out,  Word& aNum);
+
     CPUClass<std::string> pc2;
     public: 
     float getValue(){return 9.4;};
@@ -182,6 +240,32 @@ std::string operator+(Word& aWord){
 
 
      };
+
+std::string operator+(std::string aWord){
+
+        pc2.load(memory::getValue(this));
+        pc2.load(aWord);
+        std::string n = pc2.add();
+        // std::cout<<n;
+        return n;
+
+
+     };
+std::string operator+(char aWord){
+
+        pc2.load(memory::getValue(this));
+        std::string s(1,aWord);
+        pc2.load(s);
+        std::string n = pc2.add();
+        // std::cout<<n;
+        return n;
+
+
+     };
+     
+std::string operator+(float aWord){ return "Error"; };
+std::string operator+(double aWord){ return "Error"; };
+std::string operator+(int aWord){ return "Error"; };
      void operator=(std::string aWord){
     this->value = aWord;
 
@@ -194,13 +278,14 @@ std::string operator+(Word& aWord){
     this->value = std::to_string(aWord);
 
      };
-   
-     std::string  operator/(Word& aWord){
+    template<typename T>
+     std::string  operator/(T Word){
 std::cout<<"\nCannot Preform This Action on Word Variable\n";
     return "Error";
      };
+    template<typename T>
 
-      std::string operator*(Word& aWord){
+      std::string operator*(T aWord){
 std::cout<<"\nCannot Preform This Action on Word Variable\n";
     return "Error";
      };
@@ -235,3 +320,13 @@ ocss << aWord;
    return allVariables[ocss.str()]->getValueStr();
    };
    }
+
+
+
+
+          std::ostream& operator<<(std::ostream& out,  Number& aNum){
+ return out << aNum.value;;
+}
+          std::ostream& operator<<(std::ostream& out,  Word& aWord){
+return out << aWord.value;;
+}
