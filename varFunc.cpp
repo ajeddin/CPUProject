@@ -1,9 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <map>
-// #include <boolean>
 #include <vector>
 
+union Type;
 class Variable;
 class Number;
 class Word;
@@ -50,8 +50,15 @@ std::vector<T> allVar;
 
 };
 
+union Type {
+    std::string str;
+    float flt;
+};
+
+template <typename V> 
 class Variable{
-    
+    private:
+    V value;
     public:
     
     // int parent;
@@ -61,26 +68,20 @@ class Variable{
 
     }
     // virtual Variable operator+();
-    virtual std::string getValueStr()=0;
-   virtual float getValue()=0;
-   int operator==(Variable& aVar){
-    // if (this->value == aVar->getValue()){
-    std::ostringstream ocs;
-    ocs << this;
-
-    // }
-    return memory::allVariables[ocs.str()]->getValue()== aVar.getValue();
-
-}
+    // virtual std::string getValueStr()=0;
+    V getValue(){
+    return value;
+   };
+ 
 };
-
-class Number: public Variable{
+//Unions;
+class Number: public Variable<float>{
  CPUClass<float> pc;
     public:
         Number(){};
-    std::string getValueStr(){return "2";};
+    // std::string getValueStr(){return "2";};
 
-float value;
+float Type
 float getValue()  {return value;}
 float operator+(Number& aNum){
         std::ostringstream ocs, ocs2;
@@ -110,8 +111,6 @@ float operator-(Number& aNum){
 
 
      };
-
-
 float operator/(Number& aNum){
         std::ostringstream ocs, ocs2;
         // ocs << this;
@@ -145,14 +144,14 @@ float operator*(Number& aNum){
 
      };
 };
-class Word: public Variable{
+class Word: public Variable<std::string>{
     CPUClass<std::string> pc2;
     public: 
-    float getValue(){return 9.4;};
+    std::string getValue(){return value;};
     std::string value;
-    std::string getValueStr()  {
+    // std::string getValueStr()  {
     
-    return value;}
+    // return value;}
 std::string operator+(Word& aWord){
         std::ostringstream ocs, ocs2;
         // ocs << this;
@@ -175,16 +174,6 @@ std::string operator+(Word& aWord){
     this->value = aWord;
 
      };
-   
-     std::string  operator/(Word& aWord){
-std::cout<<"\nCannot Preform This Action on Word Variable\n";
-    return "Error";
-     };
-
-      std::string operator*(Word& aWord){
-std::cout<<"\nCannot Preform This Action on Word Variable\n";
-    return "Error";
-     };
     
 
 };
@@ -194,8 +183,8 @@ std::cout<<"\nCannot Preform This Action on Word Variable\n";
 
 namespace memory{
     
-    std::map<std::string,Variable*> allVariables;
-void addValueToMemory(Variable* aVar){
+    std::map<std::string,Variable<Type>*> allVariables;
+void addValueToMemory(Variable<Type>* aVar){
         std::ostringstream ocs;
 ocs << aVar;  
     allVariables[ocs.str()] = aVar;
@@ -213,6 +202,6 @@ ocss << aNum;
 std::string getValue(Word* aWord){
     std::ostringstream ocss;
 ocss << aWord;  
-   return allVariables[ocss.str()]->getValueStr();
+   return allVariables[ocss.str()]->getValue();
    };
    }
