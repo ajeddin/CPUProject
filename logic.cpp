@@ -31,6 +31,7 @@ std::vector<T> allVar;
         // std::cout<<allVar.at(0);
         T a = allVar.at(0);
         T b =  allVar.at(1);
+        // std::cout<<"\nVal of a "<<a<<" \t vall of b "<<b<<std::endl;
        return a+b;
     }
     T subtract(){
@@ -59,7 +60,6 @@ std::vector<T> allVar;
     void clearVector(){
         allVar.clear();
     }
-
 
 
 };
@@ -102,6 +102,10 @@ class Number: public Variable{
             // return (this->value== aVar.getValue());
 
 }
+void operator=(std::string aWord){
+   std::cout<<"\nError\n";
+    this->value =0;
+}
     int operator==(Word& aVar){
    std::cout<<"\nError\n";
    return 0;
@@ -116,11 +120,12 @@ class Number: public Variable{
 }
 void operator=(Word& aWord){
     std::cout<<"\nError\n";
-
+    this->value =0;
     
 
 }
     int operator==(float aVar){
+        pc.clearVector();
 //    std::cout<<"\nError\n";
     std::ostringstream ocs;
     ocs << &aVar;
@@ -146,17 +151,19 @@ float operator+(Number& aNum){
 
      };
 float operator+(float aNum){
-     
+          pc.clearVector();
+
         pc.load(memory::getValue(this));
         pc.load(aNum);
         float n = pc.add();
-        // std::cout<<n;
+        // std::cout<<"\n val of aNUM in char "<<n<<"\n";
+        
         return n;
 
 
      };
 float operator-(float aNum){
-     
+    pc.clearVector();
         pc.load(memory::getValue(this));
         pc.load(aNum);
         float n = pc.subtract();
@@ -165,8 +172,9 @@ float operator-(float aNum){
 
 
      };
+
 float operator/(float aNum){
-     
+     pc.clearVector();
         pc.load(memory::getValue(this));
         pc.load(aNum);
         float n = pc.divide();
@@ -176,7 +184,7 @@ float operator/(float aNum){
 
      };
 float operator*(float aNum){
-     
+     pc.clearVector();
         pc.load(memory::getValue(this));
         pc.load(aNum);
         float n = pc.multiply();
@@ -234,7 +242,31 @@ float operator+( Word& aWord){
     std::cout<<"\nError\n";
     return 0;
 }
+float operator-( Word& aWord){
+    std::cout<<"\nError\n";
+    return 0;
+}
+float operator*( Word& aWord){
+    std::cout<<"\nError\n";
+    return 0;
+}
+float operator/( Word& aWord){
+    std::cout<<"\nError\n";
+    return 0;
+}
 float operator+( std::string aword){
+    std::cout<<"\nError\n";
+    return 0;
+}
+float operator-( std::string aword){
+    std::cout<<"\nError\n";
+    return 0;
+}
+float operator*( std::string aword){
+    std::cout<<"\nError\n";
+    return 0;
+}
+float operator/( std::string aword){
     std::cout<<"\nError\n";
     return 0;
 }
@@ -242,11 +274,11 @@ float operator+( std::string aword){
 //     std::cout<<"\nError\n";
 //     return 0;
 // }
-
     void operator=(float aNum){
-    this->value = aNum;
+    this->value = static_cast<float> (aNum);
 
      };
+
 };
 class Word: public Variable{
              friend std::ostream& operator<<(std::ostream& out,  Word& aNum);
@@ -259,14 +291,7 @@ class Word: public Variable{
     
     return value;}
 
-//     int operator==(std::string aVar){
-
-//  pc2.load(memory::getValue(this));
-//         pc2.load(aVar);
-//         return pc2.compare();
-// }
-
-    std::string operator==(float aVar){
+    std::string operator==(char aVar){
         pc2.clearVector();
         std::ostringstream ocs,ocs1;
         ocs << aVar;
@@ -276,29 +301,78 @@ class Word: public Variable{
 
    return ocs1.str();
 
+
 }
-//     int operator==(std::string aVar){
+    std::string operator==(Number& aVar){
+        pc2.clearVector();
+        std::ostringstream ocs,ocs1;
+        ocs << memory::getValue(&aVar);
+ pc2.load(memory::getValue(this));
+ pc2.load(ocs.str());
+    ocs1 << std::boolalpha <<pc2.compare();  
 
-//  pc2.load(memory::getValue(this));
-//         pc2.load(aVar);
-//    return pc2.compare();
-// }
+   return ocs1.str();
 
 
-//    int operator==(Word& aVar){
-//     std::ostringstream ocs;
-//     ocs << &aVar;
-//  pc2.load(memory::getValue(this));
-//         pc2.load(memory::getValue(&aVar));
-//    return pc2.compare();
+}
+    std::string operator==(int aVar){
+        pc2.clearVector();
+        std::ostringstream ocs,ocs1;
+        ocs << aVar;
+ pc2.load(memory::getValue(this));
+        pc2.load(ocs.str());
+    ocs1 << std::boolalpha <<pc2.compare();  
 
-// }
-//    std::string operator==(Number& aVar){
-//    std::cout<<"\nError\n";
-//    return  "Error";
+   return ocs1.str();
 
-// }
 
+}
+    std::string operator==(std::string aVar){
+        pc2.clearVector();
+        std::ostringstream ocs1;
+
+ pc2.load(memory::getValue(this));
+        pc2.load(aVar);
+    ocs1 << std::boolalpha <<pc2.compare();  
+
+   return ocs1.str();
+
+
+}
+    std::string operator==(double aVar){
+        pc2.clearVector();
+        std::ostringstream ocs,ocs1;
+        ocs << aVar;
+ pc2.load(memory::getValue(this));
+        pc2.load(ocs.str());
+    ocs1 << std::boolalpha <<pc2.compare();  
+
+   return ocs1.str();
+
+
+}
+    std::string operator==(Word& aVar){
+        std::ostringstream ocs,ocs1;
+        ocs << aVar;
+ pc2.load(memory::getValue(this));
+        pc2.load(memory::getValue(&aVar));
+    ocs1 << std::boolalpha <<pc2.compare();  
+
+   return ocs1.str();
+
+
+}
+
+
+
+
+
+
+
+template <typename T> std::string operator-(T aWord){
+    std::cout<<"\nError\n";
+    return "Error";
+}
 std::string operator+(Word& aWord){
         std::ostringstream ocs, ocs2;
         // ocs << this;
@@ -315,26 +389,28 @@ std::string operator+(Word& aWord){
      };
 
 std::string operator+(std::string aWord){
-
+    pc2.clearVector();
         pc2.load(memory::getValue(this));
         pc2.load(aWord);
         std::string n = pc2.add();
-        // std::cout<<aWord<<std::endl;
-        // std::cout<<"\n"<<this->value<<std::endl;
-        // std::cout<<n;
-                // std::cout<<"\n"<<this->value<<" value of word in op+ \n";
-
         return n;
 
 
      };
-std::string operator+(char aWord){
 
+std::string operator+(Number aWord){
+       std::cout<<"\nError\n";
+        return "Error";
+
+
+     };
+std::string operator+(char aWord){
+        pc2.clearVector();
         pc2.load(memory::getValue(this));
         std::string s(1,aWord);
         pc2.load(s);
         std::string n = pc2.add();
-        // std::cout<<n;
+        // std::cout<<"\n"<<n<<" Val of add and in op+\t"<<aWord<<" val of aword\n"; 
         return n;
 
 
@@ -344,7 +420,7 @@ std::string operator+(float aWord){ return "Error"; };
 std::string operator+(double aWord){ return "Error"; };
 std::string operator+(int aWord){ return "Error"; };
      void operator=(std::string aWord){
-        std::cout<<"\n"<<aWord<<" Val inside op=\n";
+
     this->value = aWord;
 
      };
@@ -388,7 +464,7 @@ std::cout<<"\nCannot Preform This Action on Word Variable\n";
 std::cout<<"\nCannot Preform This Action on Word Variable\n";
     return "Error";
      };
-    
+
 
 };
 
