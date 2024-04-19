@@ -1,2 +1,2 @@
 
-result = word1 == word2;
+// std::cout<<"\n";

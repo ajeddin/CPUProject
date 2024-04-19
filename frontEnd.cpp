@@ -10,44 +10,90 @@ void testCasesWordMultiply();
 void testCasesWordDivide();
 void testCasesWordCompare();
 
-int main(){
-// testCasesNumberAdd(); //Pass
-// testCasesNumberMinus(); //Pass
-// testCasesNumberTimes(); //Pass
-// testCasesNumberDivide(); //Pass
-// testCasesNumberCompare(); //Pass
-// testCasesWordAdd(); //Pass
-// testCasesWordMinus(); //Pass
-// testCasesWordMultiply(); //Pass
-// testCasesWordDivide(); //Pass
-// testCasesWordCompare(); //Pass
-Word word1,word2;
-Number a,b;
-a = 1;
-b=0;
-word1 = "false";
-// word2 = "false";
-// std::cout<<(word1 && "5");
-// std::cout<<(word1 && true);
-// std::cout<<(word1 && a);
-// std::cout<<(a && "false"); 
-// std::cout<<(a != 5.4);
-// std::cout<<(a || 5.4);
-b = (a || 5.4);
-std::cout<<b;
-// std::cout<<(a && word2);
-// std::cout<<(a && word1);
-return 0;
-}
 // int main(){
-
-
-
-
-
-
+// // testCasesNumberAdd(); //Pass
+// // testCasesNumberMinus(); //Pass
+// // testCasesNumberTimes(); //Pass
+// // testCasesNumberDivide(); //Pass
+// // testCasesNumberCompare(); //Pass
+// // testCasesWordAdd(); //Pass
+// // testCasesWordMinus(); //Pass
+// // testCasesWordMultiply(); //Pass
+// // testCasesWordDivide(); //Pass
+// // testCasesWordCompare(); //Pass
+// Word word1,word2;
+// Number a,b;
+// a = 1;
+// b=0;
+// word1 = "false";
+// // word2 = "false";
+// // std::cout<<(word1 && "5");
+// // std::cout<<(word1 && true);
+// // std::cout<<(word1 && a);
+// // std::cout<<(a && "false"); 
+// // std::cout<<(a != 5.4);
+// // std::cout<<(a || 5.4);
+// b = (a || 5.4);
+// std::cout<<b;
+// // std::cout<<(a && word2);
+// // std::cout<<(a && word1);
 // return 0;
 // }
+
+
+
+
+
+
+
+
+
+int main(){
+Number a , b, c;
+Word aw, ae2;
+aw= "2";
+a = 5;
+b = 43.3;
+// c = a&&b;
+std::cout<<"\n";
+// output <<c;// Error
+// std::cout<<"\n"; 
+// c = a!=b; 
+// c = a!=5; 
+// c = a!='s'; 
+// c = a!=aw;  
+// c = a != 5; 
+// ae2 = aw != "false";
+// ae2 = aw != 'i'; 
+// output <<ae2; // True
+ae2 = aw != 9090;
+std::cout<<"\n";
+output <<ae2; // True
+// c = a==b;
+// std::cout<<"\n";
+// output <<c;//False 0
+// output <<a;
+
+
+
+
+
+
+
+
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 void testCasesNumberAdd(){

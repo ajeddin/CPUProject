@@ -75,12 +75,11 @@ std::vector<T> allVar;
         return (a||b);
     }
     bool notCompare(){
-        bool a, b;
-
-         std::istringstream(allVar.at(0)) >> std::boolalpha >> a;
-         std::istringstream(allVar.at(1)) >> std::boolalpha >> b;
-        return (a!=b);
+         T a = allVar.at(0);
+        T b =  allVar.at(1);
+       return a!=b;
     }
+
     bool andCompareFloat(){
             bool a = allVar.at(0);
         bool b =  allVar.at(1);
@@ -92,8 +91,8 @@ std::vector<T> allVar;
         return (a||b);
     }
     bool notCompareFloat(){
-                bool a = allVar.at(0);
-        bool b =  allVar.at(1);
+         T a = allVar.at(0);
+        T b =  allVar.at(1);
         return (a!=b);
     }
 
@@ -364,6 +363,23 @@ int operator&&(Word& aFlag){
 
 
 }
+int operator&&(Number& aFlag){
+  if ((memory::getValue(&aFlag) != 1 && memory::getValue(&aFlag) != 0 )|| (this->value != 1 && this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    // std::cout<<aFlag<<"\n";
+    // std::cout<<this->value;
+
+        return 0;
+
+    }   
+    pc.load(memory::getValue(&aFlag));
+ pc.load(memory::getValue(this));
+
+   return pc.andCompareFloat();
+            
+
+
+}
 int operator&&(float aFlag){
   if ((aFlag != 1 &&aFlag != 0 )|| (this->value != 1 &&this->value!= 0)){
     std::cout<<"\nInvalid Flag\n";
@@ -379,47 +395,63 @@ int operator&&(float aFlag){
 
 }
 int operator!=(std::string aFlag){
-  if ((aFlag != "true" &&aFlag != "false" )|| (this->value != 1 &&this->value!= 0)){
-    std::cout<<"\nInvalid Flag\n";
-    std::cout<<aFlag<<"\n";
-    std::cout<<this->value;
+//   if ((aFlag != "true" &&aFlag != "false" )|| (this->value != 1 &&this->value!= 0)){
+//     std::cout<<"\nInvalid Flag\n";
 
-        return 0;
+//         return 0;
 
-    }   
-    if (aFlag == "true"){
-    pc.load(1);
-    }
- else if (aFlag== "false"){
-    pc.load(0);
-    }
- else{
-    std::cout<<"\nInvalid Flag\n";
-    pc.load(0);
- }
- pc.load(memory::getValue(this));
-
-   return pc.notCompareFloat();
+//     }   
+//     if (aFlag == "true"){
+//     pc.load(1);
+//     }
+//  else if (aFlag== "false"){
+//     pc.load(0);
+//     }
+//  else{
+//     std::cout<<"\nInvalid Flag\n";
+//     pc.load(0);
+//  }
+//  pc.load(memory::getValue(this));
+    std::cout<<"\nError\n";
+   return  0;
             
 
 
 }
 int operator!=(Word& aFlag){
-  if ((memory::getValue(&aFlag) != "true" && memory::getValue(&aFlag) != "false" )|| (this->value != 1 && this->value!= 0)){
-    std::cout<<"\nInvalid Flag\n";
-    // std::cout<<aFlag<<"\n";
-    // std::cout<<this->value;
+//   if ((memory::getValue(&aFlag) != "true" && memory::getValue(&aFlag) != "false" )|| (this->value != 1 && this->value!= 0)){
+//     std::cout<<"\nInvalid Flag\n";
+//     // std::cout<<aFlag<<"\n";
+//     // std::cout<<this->value;
 
-        return 0;
+//         return 0;
 
-    }   
-    if (memory::getValue(&aFlag) == "true"){
-    pc.load(1);
-    }
- else if (memory::getValue(&aFlag) == "false"){
-    pc.load(0);
-    }
+//     }   
+//     if (memory::getValue(&aFlag) == "true"){
+//     pc.load(1);
+//     }
+//  else if (memory::getValue(&aFlag) == "false"){
+//     pc.load(0);
+//     }
+//  pc.load(memory::getValue(this));
+std::cout<<"\nInvalid Flag\n";
+   return 0;
+            
+
+
+}
+int operator!=(Number& aFlag){
+//   if ((memory::getValue(&aFlag) != 1 && memory::getValue(&aFlag) != 1 )|| (this->value != 1 && this->value!= 0)){
+//     std::cout<<"\nInvalid Flag\n";
+//     // std::cout<<aFlag<<"\n";
+//     // std::cout<<this->value;
+
+//         return 0;
+
+//     }   
+ 
  pc.load(memory::getValue(this));
+ pc.load(memory::getValue(&aFlag));
 
    return pc.notCompareFloat();
             
@@ -427,11 +459,11 @@ int operator!=(Word& aFlag){
 
 }
 int operator!=(float aFlag){
-  if ((aFlag != 1 &&aFlag != 0 )|| (this->value != 1 &&this->value!= 0)){
-    std::cout<<"\nInvalid Flag\n";
-      return 0;
+//   if ((aFlag != 1 &&aFlag != 0 )|| (this->value != 1 &&this->value!= 0)){
+//     std::cout<<"\nInvalid Flag\n";
+//       return 0;
 
-    }   
+//     }   
   pc.load(aFlag);
  pc.load(memory::getValue(this));
 
@@ -560,6 +592,7 @@ std::string operator&& (bool& aFlag){
         // ocs1 << std::boolalpha <<pc2.compare();  
 
 }
+
 std::string operator&&(float aFlag){
     if (this->value != "false" && this->value != "true"){
     std::cout<<"\nInvalid Flag\n";
@@ -640,28 +673,54 @@ std::string operator!=(std::string aFlag){
 
 }
 std::string operator!=(float aFlag){
-    std::cout<<aFlag;
-            std::ostringstream ocs,ocs1;
-if (this->value != "false" && this->value != "true"){
-    std::cout<<"\nInvalid Flag\n";
-    return "false";
-}
- pc2.load(memory::getValue(this));
- if (aFlag == 1){
-    pc2.load("true");
-    }
- else if (aFlag == 0){
-    std::cout<<"here";
-    pc2.load("false");
-    }
- else{
-    std::cout<<"\nInvalid Flag\n";
-    pc2.load("false");
- }
-    ocs1 << std::boolalpha <<pc2.notCompare();  
+    pc2.clearVector();
+    std::ostringstream ocs,ocs2, ocs1;
+ocs << aFlag;
+ std::string s(1, aFlag);
+ int a = aFlag - '0';
+ 
+    // std::cout<<a<<std::endl;
+    std::cout<<aFlag<<"\t"<<a<<std::endl;
+    std::cout<<aFlag<<"\t"<<s<<std::endl;
+    std::cout<<aFlag<<"\t"<<ocs.str()<<std::endl;
 
-   return ocs1.str();
+if ( (aFlag-'0')>=0 && (aFlag-'0')<=127  ){
+ pc2.load(s);
+    
 }
+else{
+    std::cout<<"here";
+ pc2.load(ocs.str());
+
+}
+///////THIS LOGIC is dumb but effiecent
+//  std::cout<<ocs.str()<<"here";
+ pc2.load(memory::getValue(this));
+    ocs1 << std::boolalpha <<pc2.notCompare();
+    return ocs1.str();
+}
+// std::string operator!=(int aFlag){
+// //             std::ostringstream ocs,ocs1;
+// // if (this->value != "false" && this->value != "true"){
+// //     std::cout<<"\nInvalid Flag\n";
+// //     return "false";
+// // }
+// //  pc2.load(memory::getValue(this));
+// //  if (aFlag == 1){
+// //     pc2.load("true");
+// //     }
+// //  else if (aFlag == 0){
+// //     std::cout<<"here";
+// //     pc2.load("false");
+// //     }
+// //  else{
+// //     std::cout<<"\nInvalid Flag\n";
+// //     pc2.load("false");
+// //  }
+// //     ocs1 << std::boolalpha <<pc2.notCompare();  
+// std::cout<<"\nError\n";
+//    return "Error";
+// }
 std::string operator!=(Word& aFlag){
     if ((aFlag.value != "true" &&aFlag.value != "false" )|| (this->value != "true" &&this->value!= "false")){
     std::cout<<"\nInvalid Flag\n";
@@ -994,3 +1053,5 @@ ocss << aWord;
           std::ostream& operator<<(std::ostream& out,  Word& aWord){
 return out << aWord.value;;
 }
+
+static std::ostream& output = std::cout;
