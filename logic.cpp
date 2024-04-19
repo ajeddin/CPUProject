@@ -61,6 +61,42 @@ std::vector<T> allVar;
         allVar.clear();
     }
 
+    bool andCompare(){
+        bool a, b;
+         std::istringstream(allVar.at(0)) >> std::boolalpha >> a;
+         std::istringstream(allVar.at(1)) >> std::boolalpha >> b;
+        return (a&&b);
+    }
+    bool orCompare(){
+        bool a, b;
+
+         std::istringstream(allVar.at(0)) >> std::boolalpha >> a;
+         std::istringstream(allVar.at(1)) >> std::boolalpha >> b;
+        return (a||b);
+    }
+    bool notCompare(){
+        bool a, b;
+
+         std::istringstream(allVar.at(0)) >> std::boolalpha >> a;
+         std::istringstream(allVar.at(1)) >> std::boolalpha >> b;
+        return (a!=b);
+    }
+    bool andCompareFloat(){
+            bool a = allVar.at(0);
+        bool b =  allVar.at(1);
+        return (a&&b);
+    }
+    bool orCompareFloat(){
+               bool a = allVar.at(0);
+        bool b =  allVar.at(1);
+        return (a||b);
+    }
+    bool notCompareFloat(){
+                bool a = allVar.at(0);
+        bool b =  allVar.at(1);
+        return (a!=b);
+    }
+
 
 };
 
@@ -279,6 +315,195 @@ float operator/( std::string aword){
 
      };
 
+
+int operator&&(std::string aFlag){
+  if ((aFlag != "true" &&aFlag != "false" )|| (this->value != 1 &&this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    std::cout<<aFlag<<"\n";
+    std::cout<<this->value;
+
+        return 0;
+
+    }   
+    if (aFlag == "true"){
+    pc.load(1);
+    }
+ else if (aFlag== "false"){
+    pc.load(0);
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc.load(0);
+ }
+ pc.load(memory::getValue(this));
+
+   return pc.andCompareFloat();
+            
+
+
+}
+int operator&&(Word& aFlag){
+  if ((memory::getValue(&aFlag) != "true" && memory::getValue(&aFlag) != "false" )|| (this->value != 1 && this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    // std::cout<<aFlag<<"\n";
+    // std::cout<<this->value;
+
+        return 0;
+
+    }   
+    if (memory::getValue(&aFlag) == "true"){
+    pc.load(1);
+    }
+ else if (memory::getValue(&aFlag) == "false"){
+    pc.load(0);
+    }
+ pc.load(memory::getValue(this));
+
+   return pc.andCompareFloat();
+            
+
+
+}
+int operator&&(float aFlag){
+  if ((aFlag != 1 &&aFlag != 0 )|| (this->value != 1 &&this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+      return 0;
+
+    }   
+  pc.load(aFlag);
+ pc.load(memory::getValue(this));
+
+   return pc.andCompareFloat();
+            
+
+
+}
+int operator!=(std::string aFlag){
+  if ((aFlag != "true" &&aFlag != "false" )|| (this->value != 1 &&this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    std::cout<<aFlag<<"\n";
+    std::cout<<this->value;
+
+        return 0;
+
+    }   
+    if (aFlag == "true"){
+    pc.load(1);
+    }
+ else if (aFlag== "false"){
+    pc.load(0);
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc.load(0);
+ }
+ pc.load(memory::getValue(this));
+
+   return pc.notCompareFloat();
+            
+
+
+}
+int operator!=(Word& aFlag){
+  if ((memory::getValue(&aFlag) != "true" && memory::getValue(&aFlag) != "false" )|| (this->value != 1 && this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    // std::cout<<aFlag<<"\n";
+    // std::cout<<this->value;
+
+        return 0;
+
+    }   
+    if (memory::getValue(&aFlag) == "true"){
+    pc.load(1);
+    }
+ else if (memory::getValue(&aFlag) == "false"){
+    pc.load(0);
+    }
+ pc.load(memory::getValue(this));
+
+   return pc.notCompareFloat();
+            
+
+
+}
+int operator!=(float aFlag){
+  if ((aFlag != 1 &&aFlag != 0 )|| (this->value != 1 &&this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+      return 0;
+
+    }   
+  pc.load(aFlag);
+ pc.load(memory::getValue(this));
+
+   return pc.notCompareFloat();
+            
+
+
+}
+int operator||(std::string aFlag){
+  if ((aFlag != "true" &&aFlag != "false" )|| (this->value != 1 &&this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    std::cout<<aFlag<<"\n";
+    std::cout<<this->value;
+
+        return 0;
+
+    }   
+    if (aFlag == "true"){
+    pc.load(1);
+    }
+ else if (aFlag== "false"){
+    pc.load(0);
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc.load(0);
+ }
+ pc.load(memory::getValue(this));
+
+   return pc.orCompareFloat();
+            
+
+
+}
+int operator||(Word& aFlag){
+  if ((memory::getValue(&aFlag) != "true" && memory::getValue(&aFlag) != "false" )|| (this->value != 1 && this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+    // std::cout<<aFlag<<"\n";
+    // std::cout<<this->value;
+
+        return 0;
+
+    }   
+    if (memory::getValue(&aFlag) == "true"){
+    pc.load(1);
+    }
+ else if (memory::getValue(&aFlag) == "false"){
+    pc.load(0);
+    }
+ pc.load(memory::getValue(this));
+
+   return pc.orCompareFloat();
+            
+
+
+}
+int operator||(float aFlag){
+  if ((aFlag != 1 &&aFlag != 0 )|| (this->value != 1 &&this->value!= 0)){
+    std::cout<<"\nInvalid Flag\n";
+      return 0;
+
+    }   
+  pc.load(aFlag);
+ pc.load(memory::getValue(this));
+
+   return pc.orCompareFloat();
+            
+
+
+}
+
+
 };
 class Word: public Variable{
              friend std::ostream& operator<<(std::ostream& out,  Word& aNum);
@@ -297,10 +522,275 @@ class Word: public Variable{
         ocs << aVar;
  pc2.load(memory::getValue(this));
         pc2.load(ocs.str());
-    ocs1 << std::boolalpha <<pc2.compare();  
+    ocs1 << std::boolalpha <<pc2.andCompare();  
 
    return ocs1.str();
 
+
+}
+std::string operator&&(std::string aFlag){
+     if ((aFlag != "true" &&aFlag != "false" )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+            std::ostringstream ocs,ocs1;
+
+ pc2.load(memory::getValue(this));
+ pc2.load(aFlag);
+    ocs1 << std::boolalpha <<pc2.andCompare();  
+
+   return ocs1.str();
+            
+
+        // ocs1 << std::boolalpha <<pc2.compare();  
+
+}
+std::string operator&& (bool& aFlag){
+    std::cout<<aFlag;
+    pc2.clearVector();
+            std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+    ocs << std::boolalpha <<aFlag;  
+ pc2.load(ocs.str());
+    ocs1 << std::boolalpha <<pc2.andCompare();  
+
+   return ocs1.str();
+            
+
+        // ocs1 << std::boolalpha <<pc2.compare();  
+
+}
+std::string operator&&(float aFlag){
+    if (this->value != "false" && this->value != "true"){
+    std::cout<<"\nInvalid Flag\n";
+    return "false";
+}
+            std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+ if (aFlag == 1){
+    pc2.load("true");
+    }
+ else if (aFlag == 0){
+    std::cout<<"here";
+    pc2.load("false");
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc2.load("false");
+ }
+    ocs1 << std::boolalpha <<pc2.andCompare();  
+
+   return ocs1.str();
+}
+std::string operator&&(Word& aFlag){
+    if ((aFlag.value != "true" &&aFlag.value != "false" )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+ pc2.load(memory::getValue(&aFlag));
+
+    ocs1 << std::boolalpha <<pc2.andCompare();  
+
+   return ocs1.str();
+
+}
+std::string operator&&(Number& aFlag){
+    if ((aFlag.value != 1 &&aFlag.value != 0 )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+std::ostringstream ocs,ocs1;
+
+ pc2.load(memory::getValue(this));
+ ocs <<memory::getValue(&aFlag);
+  if (ocs.str() == "1"){
+    pc2.load("true");
+    }
+ else if (ocs.str() == "0"){
+    std::cout<<"here";
+    pc2.load("false");
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc2.load("false");
+ }
+
+    ocs1 << std::boolalpha <<pc2.andCompare();  
+
+   return ocs1.str();
+
+}
+std::string operator!=(std::string aFlag){
+     if ((aFlag != "true" &&aFlag != "false" )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+            std::ostringstream ocs,ocs1;
+
+ pc2.load(memory::getValue(this));
+ pc2.load(aFlag);
+    ocs1 << std::boolalpha <<pc2.notCompare();  
+
+   return ocs1.str();
+            
+
+        // ocs1 << std::boolalpha <<pc2.compare();  
+
+}
+std::string operator!=(float aFlag){
+    std::cout<<aFlag;
+            std::ostringstream ocs,ocs1;
+if (this->value != "false" && this->value != "true"){
+    std::cout<<"\nInvalid Flag\n";
+    return "false";
+}
+ pc2.load(memory::getValue(this));
+ if (aFlag == 1){
+    pc2.load("true");
+    }
+ else if (aFlag == 0){
+    std::cout<<"here";
+    pc2.load("false");
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc2.load("false");
+ }
+    ocs1 << std::boolalpha <<pc2.notCompare();  
+
+   return ocs1.str();
+}
+std::string operator!=(Word& aFlag){
+    if ((aFlag.value != "true" &&aFlag.value != "false" )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+ pc2.load(memory::getValue(&aFlag));
+
+    ocs1 << std::boolalpha <<pc2.notCompare();  
+
+   return ocs1.str();
+
+}
+std::string operator!=(Number& aFlag){
+    if ((aFlag.value != 1 &&aFlag.value != 0 )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+std::ostringstream ocs,ocs1;
+
+ pc2.load(memory::getValue(this));
+ ocs <<memory::getValue(&aFlag);
+  if (ocs.str() == "1"){
+    pc2.load("true");
+    }
+ else if (ocs.str() == "0"){
+    std::cout<<"here";
+    pc2.load("false");
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc2.load("false");
+ }
+
+    ocs1 << std::boolalpha <<pc2.notCompare();  
+
+   return ocs1.str();
+
+}
+std::string operator||(std::string aFlag){
+     if ((aFlag != "true" &&aFlag != "false" )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+            std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+ pc2.load(aFlag);
+    ocs1 << std::boolalpha <<pc2.orCompare();  
+
+   return ocs1.str();
+            
+
+        // ocs1 << std::boolalpha <<pc2.compare();  
+
+}
+// std::string operator|| (bool aFlag){
+//             std::ostringstream ocs,ocs1;
+//  pc2.load(memory::getValue(this));
+//     ocs << std::boolalpha <<aFlag;  
+//  pc2.load(ocs.str());
+//     ocs1 << std::boolalpha <<pc2.orCompare();  
+
+//    return ocs1.str();
+            
+
+//         // ocs1 << std::boolalpha <<pc2.compare();  
+
+// }
+std::string operator||(float aFlag){
+    if (this->value != "false" && this->value != "true"){
+    std::cout<<"\nInvalid Flag\n";
+    return "false";
+}
+            std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+ if (aFlag == 1){
+    pc2.load("true");
+    }
+ else if (aFlag == 0){
+    std::cout<<"here";
+    pc2.load("false");
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc2.load("false");
+ }
+    ocs1 << std::boolalpha <<pc2.orCompare();  
+
+   return ocs1.str();
+}
+std::string operator||(Word& aFlag){
+    if ((aFlag.value != "true" &&aFlag.value != "false" )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+std::ostringstream ocs,ocs1;
+ pc2.load(memory::getValue(this));
+ pc2.load(memory::getValue(&aFlag));
+
+    ocs1 << std::boolalpha <<pc2.orCompare();  
+
+   return ocs1.str();
+
+}
+std::string operator||(Number& aFlag){
+    if ((aFlag.value != 1 &&aFlag.value != 0 )|| (this->value != "true" &&this->value!= "false")){
+    std::cout<<"\nInvalid Flag\n";
+        return "false";
+    }
+std::ostringstream ocs,ocs1;
+
+ pc2.load(memory::getValue(this));
+ ocs <<memory::getValue(&aFlag);
+  if (ocs.str() == "1"){
+    pc2.load("true");
+    }
+ else if (ocs.str() == "0"){
+    std::cout<<"here";
+    pc2.load("false");
+    }
+ else{
+    std::cout<<"\nInvalid Flag\n";
+    pc2.load("false");
+ }
+
+    ocs1 << std::boolalpha <<pc2.orCompare();  
+
+   return ocs1.str();
 
 }
     std::string operator==(Number& aVar){
@@ -316,6 +806,7 @@ class Word: public Variable{
 
 }
     std::string operator==(int aVar){
+
         pc2.clearVector();
         std::ostringstream ocs,ocs1;
         ocs << aVar;
@@ -467,8 +958,6 @@ std::cout<<"\nCannot Preform This Action on Word Variable\n";
 
 
 };
-
-
 
 
 namespace memory{

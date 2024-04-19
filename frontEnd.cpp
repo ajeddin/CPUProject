@@ -21,8 +21,33 @@ int main(){
 // testCasesWordMultiply(); //Pass
 // testCasesWordDivide(); //Pass
 // testCasesWordCompare(); //Pass
+Word word1,word2;
+Number a,b;
+a = 1;
+b=0;
+word1 = "false";
+// word2 = "false";
+// std::cout<<(word1 && "5");
+// std::cout<<(word1 && true);
+// std::cout<<(word1 && a);
+// std::cout<<(a && "false"); 
+// std::cout<<(a != 5.4);
+// std::cout<<(a || 5.4);
+b = (a || 5.4);
+std::cout<<b;
+// std::cout<<(a && word2);
+// std::cout<<(a && word1);
 return 0;
 }
+// int main(){
+
+
+
+
+
+
+// return 0;
+// }
 
 
 void testCasesNumberAdd(){
