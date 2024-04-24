@@ -925,6 +925,11 @@ std::istream &operator>(std::istream &in, double aNum)
     in >> aNum;
     return in;
 }
+std::istream &operator>(std::istream &in, int aNum)
+{
+    in >> aNum;
+    return in;
+}
 std::istream &operator>(std::istream &in, std::string aNum)
 {
     in >> aNum;
@@ -937,6 +942,10 @@ std::istream &operator>(std::istream &in, char aNum)
 }
 
 
+std::ostream &operator<(std::ostream &out, int aWord)
+{
+    return out << aWord;
+}
 std::ostream &operator<(std::ostream &out, double aWord)
 {
     return out << aWord;
