@@ -920,4 +920,33 @@ std::istream &operator>(std::istream &in, Word &aWord)
     in >> aWord.value;
     return in;
 }
+std::istream &operator>(std::istream &in, double aNum)
+{
+    in >> aNum;
+    return in;
+}
+std::istream &operator>(std::istream &in, std::string aNum)
+{
+    in >> aNum;
+    return in;
+}
+std::istream &operator>(std::istream &in, char aNum)
+{
+    in >> aNum;
+    return in;
+}
 
+
+std::ostream &operator<(std::ostream &out, double aWord)
+{
+    return out << aWord;
+}
+
+std::ostream &operator<(std::ostream &out, std::string aWord)
+{
+    return out << aWord;
+}
+std::ostream &operator<(std::ostream &out, char aWord)
+{
+    return out << aWord;
+}
