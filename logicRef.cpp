@@ -118,6 +118,7 @@ class Number : public Variable
 private:
     CPUClass<float> pc;
     friend std::ostream &operator<<(std::ostream &out, Number &aNum);
+    friend std::istream &operator>>(std::istream &in, Number &aNum);
 
 public:
     Number(){};
@@ -415,6 +416,17 @@ public:
         pc.load(memory::getValue(this));
         return pc.orCompareFloat();
     }
+    int operator||(Number& aFlag)
+    {
+        if ((aFlag.getValue() != 1 && aFlag.getValue() != 0) || (this->value != 1 && this->value != 0))
+        {
+            std::cout << "\nInvalid Flag\n";
+            return 0;
+        }
+        pc.load(memory::getValue(this));
+        pc.load(memory::getValue(&aFlag));
+        return pc.orCompareFloat();
+    }
 };
 
 class Word : public Variable
@@ -489,8 +501,7 @@ public:
     }
     std::string operator==(Word &aVar)
     {
-        std::ostringstream ocs, ocs1;
-        ocs << aVar;
+        std::ostringstream  ocs1;
         pc2.load(memory::getValue(this));
         pc2.load(memory::getValue(&aVar));
         ocs1 << std::boolalpha << pc2.compare();
@@ -647,11 +658,6 @@ public:
     }
     std::string operator!=(Word &aFlag)
     {
-        if ((aFlag.value != "true" && aFlag.value != "false") || (this->value != "true" && this->value != "false"))
-        {
-            std::cout << "\nInvalid Flag\n";
-            return "false";
-        }
         std::ostringstream ocs, ocs1;
         pc2.load(memory::getValue(this));
         pc2.load(memory::getValue(&aFlag));
@@ -895,13 +901,23 @@ namespace memory
     };
 }
 
-std::ostream &operator<<(std::ostream &out, Number &aNum)
+std::ostream &operator<(std::ostream &out, Number &aNum)
 {
     return out << aNum.value;
 }
-std::ostream &operator<<(std::ostream &out, Word &aWord)
+std::ostream &operator<(std::ostream &out, Word &aWord)
 {
     return out << aWord.value;
 }
 
-static std::ostream &output = std::cout;
+std::istream &operator>(std::istream &in, Number &aNum)
+{
+    in >> aNum.value;
+    return in;
+}
+std::istream &operator>(std::istream &in, Word &aWord)
+{
+    in >> aWord.value;
+    return in;
+}
+
