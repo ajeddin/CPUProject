@@ -1,26 +1,16 @@
 # CPU Project
 
-## Numbers
-- Int - Double
-#### Initialization
-- Number x;
-#### Assignment
-- x = 5; or x = 5.5;
-#### Capability
-- EQUAL, AND, OR, NOT Operations 
-- +, -, /, * Arithmetic Operations
+## Description
+This project is a simple implementation of a CPU simulator with support for arithmetic and logical operations, as well as variable storage and manipulation. This project is to help help me understand the fundementals of OOP (object oriented programming) through programming a functional simulated CPU, Memory, and language and overloading operators. 
 
-## Word
-- Char - String
-#### Initialization
-- Word x;
-#### Assignment
-- x = "word"; or x = 'w';
-#### Capability
-- EQUAL, AND, OR, NOT Operations 
-- Addition Arithmetic Operation (Concatenation)
+## Features
+Arithmetic operations: Addition, subtraction, multiplication, and division.
+Logical operations: AND, OR, NOT.
+Variable storage: Numbers and Words can be stored and accessed from memory.
+Overloaded operators: Allows intuitive usage of operators for arithmetic and logical operations.
 
-## Output
-- output << n 
-- Words with both Number and Word
+## Requirements
+C++11
 
+## Contribute
+Please submit any issues through the [github](https://github.com/ajeddin/CPUProject/issues/new)
