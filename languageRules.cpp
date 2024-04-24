@@ -1,8 +1,8 @@
 #include "logicRef.cpp"
 
-#define ANDAND &&
-#define OREQUAL ||
-#define eL ;
+#define ANDAND && // Reasoning - My comparison operators yeild a float 
+#define OREQUAL || // Reasoning - My comparison operators yeild a float 
+#define eL ; 
 
 #define start int main(){
 #define end return 0;}

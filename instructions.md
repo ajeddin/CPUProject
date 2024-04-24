@@ -1,11 +1,11 @@
-# Instructions
-## Starting the Program
+# Instructions 
+## Starting the Program 
 ```cpp
 start //write "start" to start program 
     yourCode //your code in between
 end //write "end" to end program
 ```
-## Key Instructions
+## Key Instructions 
 ```cpp
 start
     Number x, y, z eL //all lines must end in eL
@@ -16,7 +16,7 @@ start
     space // write space to add a space
 end
 ```
-## Initialization
+## Initialization 
 ```cpp
 start 
     Number x, y eL //Number Initialization
